@@ -21,7 +21,7 @@ const WALLET_ICONS = {
 export default function Home() {
   return (
     <div className="container">
-      <h1>Meine Krypto-Wallet-Adressen</h1>
+      <h1>My Crypto Wallets</h1>
       <div className="wallets-container">
         {wallets.map((wallet) => {
           const Icon = WALLET_ICONS[wallet.name] || FaBitcoin;
