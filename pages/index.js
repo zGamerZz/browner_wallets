@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { 
   FaBitcoin, 
-  FaEthereum 
+  FaEthereum,
+  FaWallet
 } from 'react-icons/fa';
 import { 
   SiLitecoin, 
@@ -18,13 +20,27 @@ const WALLET_ICONS = {
   "PayPal": FaPaypal
 };
 
+const FALLBACK_ICONS = [FaBitcoin, FaEthereum, FaWallet]; // Icons für die Rotation
+
 export default function Home() {
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIconIndex((prevIndex) => 
+        (prevIndex + 1) % FALLBACK_ICONS.length
+      );
+    }, 1000); // Wechselt jede Sekunde
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="container">
       <h1>My Crypto Wallets</h1>
       <div className="wallets-container">
         {wallets.map((wallet) => {
-          const Icon = WALLET_ICONS[wallet.name] || FaBitcoin;
+          const Icon = WALLET_ICONS[wallet.name] || FALLBACK_ICONS[currentIconIndex];
           return (
             <div key={wallet.id} className="wallet-card">
               <div className="wallet-header">
