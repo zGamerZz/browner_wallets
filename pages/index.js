@@ -24,13 +24,18 @@ const FALLBACK_ICONS = [FaBitcoin, FaEthereum, FaWallet]; // Icons für die Rota
 
 export default function Home() {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIconIndex((prevIndex) => 
-        (prevIndex + 1) % FALLBACK_ICONS.length
-      );
-    }, 1000); // Wechselt jede Sekunde
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIconIndex((prevIndex) => 
+          (prevIndex + 1) % FALLBACK_ICONS.length
+        );
+        setIsAnimating(false);
+      }, 500); // Hälfte der Intervalzeit für die Animation
+    }, 2000); // Gesamtintervall auf 2 Sekunden erhöht
 
     return () => clearInterval(interval);
   }, []);
@@ -44,7 +49,9 @@ export default function Home() {
           return (
             <div key={wallet.id} className="wallet-card">
               <div className="wallet-header">
-                <Icon className="wallet-icon" />
+                <div className={`icon-container ${isAnimating ? 'slide-out' : ''}`}>
+                  <Icon className="wallet-icon" />
+                </div>
                 <h2>{wallet.name}</h2>
               </div>
               <p>{wallet.address}</p>
@@ -52,6 +59,23 @@ export default function Home() {
           );
         })}
       </div>
+
+      <style jsx>{`
+        .icon-container {
+          transform: translateY(0);
+          opacity: 1;
+          transition: all 0.5s ease-in-out;
+        }
+        
+        .icon-container.slide-out {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        
+        .wallet-icon {
+          font-size: 24px;
+        }
+      `}</style>
     </div>
   );
 }
