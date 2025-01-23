@@ -211,3 +211,34 @@ h1 {
 .wallet-card {
   animation: fadeIn 0.5s ease-out forwards;
 }
+
+.wallet-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.wallet-icon {
+  font-size: 1.5rem;
+  color: #4facfe;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.wallet-card:hover .wallet-icon {
+  color: #00f2fe;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}

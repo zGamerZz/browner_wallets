@@ -2,11 +2,26 @@
     {
         "id": 1,
         "name": "Bitcoin Wallet",
-        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+        "address": "bc1q4we9uq303vlz8lz0rnrpjawytrscegfvel47s6"
     },
     {
         "id": 2,
         "name": "Ethereum Wallet",
-        "address": "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67"
+        "address": "0x65ABDbc843C04219e0e44e69DB2B507331D58f94"
+    },
+    {
+        "id": 3,
+        "name": "Solana Wallet",
+        "address": "23PQ254j6N9DkLhRLV91K3zr934HpsQRDjeeWWkQe7Z3"
+    },
+    {
+        "id": 4,
+        "name": "Litecoin Wallet",
+        "address": "ltc1qul7ekw7phjvd0d88mtym67mjgvlvlaxdl2lnyr"
+    },
+    {
+        "id": 5,
+        "name": "PayPal",
+        "address": "hamox.service@gmail.com"
     }
 ]
