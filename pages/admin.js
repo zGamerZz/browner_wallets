@@ -1,58 +1,58 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Admin() {
   const [walletData, setWalletData] = useState([]);
-  const [newWallet, setNewWallet] = useState({ name: '', address: '' });
+  const [newWallet, setNewWallet] = useState({ name: "", address: "" });
 
   const addWallet = () => {
     if (newWallet.name && newWallet.address) {
       setWalletData([...walletData, { id: walletData.length + 1, ...newWallet }]);
-      setNewWallet({ name: '', address: '' });
+      setNewWallet({ name: "", address: "" });
     }
   };
 
   const saveWallets = async () => {
-    const response = await fetch('/api/save-wallets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/save-wallets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(walletData),
     });
 
     if (response.ok) {
-      alert('Wallets gespeichert!');
+      alert("Wallets gespeichert!");
     } else {
-      alert('Fehler beim Speichern.');
+      alert("Fehler beim Speichern.");
     }
   };
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', padding: '20px' }}>
+    <div className="admin-container">
       <h1>Admin Panel</h1>
-      <div style={{ marginBottom: '20px' }}>
+      <div className="form-container">
         <input
           type="text"
           placeholder="Wallet Name"
           value={newWallet.name}
           onChange={(e) => setNewWallet({ ...newWallet, name: e.target.value })}
-          style={{ marginRight: '10px' }}
         />
         <input
           type="text"
           placeholder="Wallet Adresse"
           value={newWallet.address}
           onChange={(e) => setNewWallet({ ...newWallet, address: e.target.value })}
-          style={{ marginRight: '10px' }}
         />
         <button onClick={addWallet}>Hinzufügen</button>
       </div>
-      <ul>
-        {walletData.map((wallet) => (
-          <li key={wallet.id}>
-            {wallet.name}: {wallet.address}
-          </li>
-        ))}
-      </ul>
-      <button onClick={saveWallets}>Speichern</button>
+      <div className="wallet-list">
+        <ul>
+          {walletData.map((wallet) => (
+            <li key={wallet.id}>
+              {wallet.name}: {wallet.address}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <button className="save-btn" onClick={saveWallets}>Speichern</button>
     </div>
   );
 }
